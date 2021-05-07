@@ -1,24 +1,43 @@
 const inquirer = require('inquirer')
 const fs = require('fs')
 
-const readMe = ({name,username,email,project,description,test,command,license,usage,contribute}) => {
-    var readmeString = `Hello my name is ${name}, you can find me at (${github})
-    or ${email}\n
-    ##Welcome to ${project}\n
-    #Description\n
+const readMe = ({name,email,username,project,description,test,command,license,usage,contribute}) => {
+    var readmeString = `
+    ## ${project}\n
+    ## Table of Contents \n
+    - [Description](#description)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [License](#license)
+    - [Contributing](#contributing)
+    - [Tests](#tests)
+
+    # Description\n
     ${description}\n
-    #Installation\n
+
+    # Installation\n
     To install necessary dependencies, run the following command:\n
     ${command}\n
-    #Usage\n
+
+    # Usage\n
     ${usage}\n
-    #License\n
+
+    # License\n
     ${license}\n
-    #Contributing\n
+
+    # Contributing\n
     ${contribute}\n
-    #Tests\n
+
+    # Tests\n
     To run tests, run the following command:\n
     ${test}\n
+    
+    # Questions\n
+    Hello my name is ${name}, you can reach me at ${email}\n
+    My GitHub username is ${username}\n
+    Live link to my repository: [github repository](${github})\n
+    
+
  
     `;
     return readmeString;
@@ -35,6 +54,11 @@ inquirer
         type: 'input',
         message: 'What is your email address?',
         name: 'email'
+    },
+    {
+        type: 'input',
+        message: 'What is your GitHub username?',
+        name: 'username'
     },
     {
         type: 'input',
@@ -70,6 +94,11 @@ inquirer
         type: 'input',
         message: 'What does the user need to know about contributing to the repo?',
         name: 'contribute'
+    },
+    {
+        type: 'input',
+        message: "What is your GitHub repository URL?",
+        name: 'github'
     }
 ]).then(response => {
     fs.writeFile("NewREADME.md", readMe(), (err) =>
