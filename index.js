@@ -4,43 +4,38 @@ const fs = require('fs')
 
 
 const readMe = ({name,email,username,project,description,test,github,command,license,usage,contribute}) => {
-    var readmeString = `
-    # ${project}\n
-    ${license}\n
-    ## Table of Contents \n
-    - [Description](#description)
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [License](#license)
-    - [Contributing](#contributing)
-    - [Tests](#tests)
+    var readmeString = 
+    `# ${project}
+${license} 
+## Table of Contents 
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
 
-    ## Description\n
-    ${description}\n
+## Description 
+${description}
 
-    ## Installation\n
-    To install necessary dependencies, run the following command:\n
-    ${command}\n
+## Installation
+To install necessary dependencies, run the following command:\n
+${command}
 
-    ## Usage\n
-    ${usage}\n
-
+## Usage
+${usage}
     
-    ## Contributing\n
-    ${contribute}\n
+## Contributing
+${contribute}
 
-    ## Tests\n
-    To run tests, run the following command:\n
-    ${test}\n
+## Tests
+To run tests, run the following command:
+${test}
 
-    # Questions\n
-    Hello my name is ${name}, you can reach me at ${email}\n
-    My GitHub username is ${username}\n
-    Live link to my repository: [github repository](${github})\n
-    
-
- 
-    `;
+# Questions
+Hello my name is ${name}, you can reach me at ${email}
+My GitHub username is ${username}
+Live link to my repository: [github repository](${github})`;
     return readmeString;
 };
 
