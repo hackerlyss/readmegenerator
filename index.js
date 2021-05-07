@@ -1,9 +1,12 @@
 const inquirer = require('inquirer')
 const fs = require('fs')
 
-const readMe = ({name,email,username,project,description,test,command,license,usage,contribute}) => {
+
+
+const readMe = ({name,email,username,project,description,test,github,command,license,usage,contribute}) => {
     var readmeString = `
-    ## ${project}\n
+    # ${project}\n
+    ${license}\n
     ## Table of Contents \n
     - [Description](#description)
     - [Installation](#installation)
@@ -12,26 +15,24 @@ const readMe = ({name,email,username,project,description,test,command,license,us
     - [Contributing](#contributing)
     - [Tests](#tests)
 
-    # Description\n
+    ## Description\n
     ${description}\n
 
-    # Installation\n
+    ## Installation\n
     To install necessary dependencies, run the following command:\n
     ${command}\n
 
-    # Usage\n
+    ## Usage\n
     ${usage}\n
 
-    # License\n
-    ${license}\n
-
-    # Contributing\n
+    
+    ## Contributing\n
     ${contribute}\n
 
-    # Tests\n
+    ## Tests\n
     To run tests, run the following command:\n
     ${test}\n
-    
+
     # Questions\n
     Hello my name is ${name}, you can reach me at ${email}\n
     My GitHub username is ${username}\n
@@ -81,9 +82,30 @@ inquirer
         name: 'command'
     },
     {
-        type: 'input',
-        message: 'What kind of license should your project have?',
-        name: 'license'
+        type: 'checkbox',
+        message: 'Please choose from the following licenses:',
+        name: 'license',
+        choices: [
+            {
+                name: "MIT[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+            },
+            {
+                name: "Apache[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+            },
+            {
+                name: "GNU[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
+            },
+            {
+                name: "ISC[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)"
+            }
+        ],
+        validate: function (answer) {
+            if (answer.length < 1) {
+              return 'You must choose a license.';
+            }
+    
+            return true;
+          }
     },
     {
         type: 'input',
@@ -101,6 +123,8 @@ inquirer
         name: 'github'
     }
 ]).then(response => {
-    fs.writeFile("NewREADME.md", readMe(), (err) =>
+    const filename = `${response.project.split(' ').join('')}Readme.md`;
+    fs.writeFile(filename, readMe(response), (err) =>
         err ? error.log(err) : console.log("success"));
+        
 })

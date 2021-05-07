@@ -8,3 +8,7 @@ JavaScript, HTML, Node.js, VS Code, Inquirer
 
 # Live Links:
 (https://github.com/hackerlyss/readmegenerator)
+Demonstration of the generator()
+
+# License:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT);
